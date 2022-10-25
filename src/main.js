@@ -21,6 +21,7 @@ function setCardType(type) {
   ccLogo.setAttribute("src", `cc-${type}.svg`)
 }
 
+// Permite acessar a função pela DOM
 globalThis.setCardType = setCardType
 
 const securityCode = document.querySelector("#security-code")
@@ -125,15 +126,62 @@ document.querySelector("form").addEventListener("submit", event => {
   event.preventDefault()
 })
 
+function checkCardNumber() {
+  if (cardNumberMasked.masked.isComplete) {
+    cardNumber.classList.remove("incomplete")
+    cardNumber.classList.add("complete")
+  } 
+  else {
+    cardNumber.classList.remove("complete")
+    cardNumber.classList.add("incomplete")
+  }
+}
+
+function checkCardHolder() {
+  if (cardHolder.value != "") {
+    cardHolder.classList.remove("incomplete")
+    cardHolder.classList.add("complete")
+  }
+  else {
+    cardHolder.classList.remove("complete")
+    cardHolder.classList.add("incomplete")
+  }
+}
+
+function checkExpirationDate() {
+  if (expirationDateMasked.masked.isComplete) {
+    expirationDate.classList.remove("incomplete")
+    expirationDate.classList.add("complete")
+  } 
+  else {
+    expirationDate.classList.remove("complete")
+    expirationDate.classList.add("incomplete")
+  }
+}
+
+function checkSecurityCode() {
+  securityCode
+  if (String(securityCodeMasked.value).length >= 3) {
+    securityCode.classList.remove("incomplete")
+    securityCode.classList.add("complete")
+  } 
+  else {
+    securityCode.classList.remove("complete")
+    securityCode.classList.add("incomplete")
+  }
+}
+
 const cardHolder = document.querySelector("#card-holder")
 cardHolder.addEventListener("input", () => {
   const ccHolder = document.querySelector(".cc-holder .value")
 
   ccHolder.innerText = cardHolder.value.length === 0 ? "NOME E SOBRENOME" : cardHolder.value
+  checkCardHolder()
 })
 
 securityCodeMasked.on("accept", () => {
   updateSecurityCode(securityCodeMasked.value);
+  checkSecurityCode()
 })
 
 function updateSecurityCode(code){
@@ -146,6 +194,7 @@ cardNumberMasked.on("accept", () => {
   const cardType = cardNumberMasked.masked.currentMask.cardtype
   setCardType(cardType)
   updateCardNumber(cardNumberMasked.value)
+  checkCardNumber()
 })
 
 function updateCardNumber(number) {
@@ -155,6 +204,7 @@ function updateCardNumber(number) {
 
 expirationDateMasked.on("accept", () => {
   updateExpirationDate(expirationDateMasked .value)
+  checkExpirationDate()
 })
 
 function updateExpirationDate(date) {
