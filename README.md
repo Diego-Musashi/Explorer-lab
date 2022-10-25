@@ -45,6 +45,5 @@ Esse projeto está sob a licença MIT.
 
 ---
 
-<<<< ###
-Feito com ♥ by Diego Musashi and Rocketseat :wave: [Participe da nossa comunidade!](https://discord.gg/rocketseat)
->>>> 
+### Feito com ♥ by Diego Musashi and Rocketseat :wave: [Participe da nossa comunidade!](https://discord.gg/rocketseat)
+
