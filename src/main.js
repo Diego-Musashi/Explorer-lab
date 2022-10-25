@@ -93,6 +93,29 @@ const cardNumberPattern = {
 }
 const cardNumberMasked = IMask(cardNumber, cardNumberPattern)
 
+const addButton = document.querySelector("#add-card")
+const appWrapper = document.querySelector("#app")
+const messageWrapper = document.querySelector("#message")
+
+addButton.addEventListener("click", () => {
+  let isFormComplete =
+    cardNumberMasked.masked.isComplete &&
+    cardHolder.value != "" &&
+    expirationDateMasked.masked.isComplete &&
+    String(securityCodeMasked.value).length >= 3
+
+  if (isFormComplete) {
+    appWrapper.classList.add("hide")
+    messageWrapper.classList.remove("hide")
+   } 
+  else {
+    checkCardNumber()
+    checkCardHolder()
+    checkExpirationDate()
+    checkSecurityCode()
+  }
+})
+
 const okButton = document.querySelector("#ok-message")
   okButton.addEventListener("click", () => {
   window.location.reload()
